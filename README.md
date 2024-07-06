@@ -100,8 +100,15 @@ def predict_class(img_array):
     return predicted_class, predictions[0]
 
 ```
-
+#### You will be asked for uploading an image
 ![Image Alt Text](https://github.com/VANSH-Chugh/Satellite-Image-Classification/blob/main/output/1.png)
+
+#### Select a Random Image
+![Image Alt Text](https://github.com/VANSH-Chugh/Satellite-Image-Classification/blob/main/output/2.png)
+
+
+#### Get the Inference
+![Image Alt Text](https://github.com/VANSH-Chugh/Satellite-Image-Classification/blob/main/output/3.png)
 
 ### 5. Result Display
 The application renders the result on the same page, showing the uploaded image, the predicted class, and the probabilities for all classes. The HTML template (index.html) handles the display.
