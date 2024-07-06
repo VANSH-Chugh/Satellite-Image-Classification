@@ -85,41 +85,48 @@ def preprocess_image(image_path):
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
+```
 
-    4. Model Prediction
+### 4. Model Prediction
+
 The preprocessed image is fed into the pre-trained Keras model to get predictions. The class with the highest probability is chosen as the predicted class.
 
 python
 Copy code
+```
 def predict_class(img_array):
     predictions = model.predict(img_array)
     predicted_class_idx = np.argmax(predictions[0])
     predicted_class = class_labels[predicted_class_idx]
     return predicted_class, predictions[0]
-5. Result Display
+
+```
+### 5. Result Display
 The application renders the result on the same page, showing the uploaded image, the predicted class, and the probabilities for all classes. The HTML template (index.html) handles the display.
 
-6. Static File Handling
+### 6. Static File Handling
 A separate route is defined to serve the uploaded images from the static/uploads directory.
 
 python
 Copy code
+```
 @app.route('/display/<filename>')
 def display_image(filename):
     return redirect(url_for('static', filename='uploads/' + filename), code=301)
+```
 Model Training
 If you want to train the model yourself, follow these steps:
 
-1. Dataset Preparation
+#### 1. Dataset Preparation
 Prepare your dataset of images categorized into classes (e.g., cloudy, desert, green_area, water). Organize the images into the following directories:
 
 train/: Training images for model training.
 val/: Validation images for model evaluation during training.
 test/: Testing images for final model evaluation.
-2. Data Augmentation and Preprocessing
+#### 2. Data Augmentation and Preprocessing
 Use ImageDataGenerator from Keras to augment and preprocess your images. Augmentation helps in generating variations of images to improve model robustness.
 
-3. Model Definition
+#### 3. Model Definition
 Define your convolutional neural network (CNN) model using Keras. Below is a sample model definition:
 
 python
@@ -134,7 +141,7 @@ model = models.Sequential([
     layers.Dense(16, activation='relu'),
     layers.Dense(4, activation='softmax')
 ])
-4. Model Compilation
+#### 4. Model Compilation
 Compile your model with an optimizer, loss function, and metrics:
 
 python
@@ -142,7 +149,7 @@ Copy code
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
-5. Model Training
+#### 5. Model Training
 Train your model using the prepared dataset:
 
 python
@@ -152,14 +159,14 @@ history = model.fit(
     epochs=4,
     validation_data=val_generator
 )
-6. Model Evaluation
+#### 6. Model Evaluation
 Evaluate your model on the test dataset to measure its performance:
 
 python
 Copy code
 test_loss, test_acc = model.evaluate(test_generator)
 print(f"Test Accuracy: {test_acc}")
-7. Save the Trained Model
+#### 7. Save the Trained Model
 Save your trained model for later use:
 
 python
