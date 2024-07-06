@@ -13,18 +13,12 @@ This repository contains a Flask web application for image classification using 
 
 ## Table of Contents
 
-- [Demo](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
 - [How It Works](#how-it-works)
 - [Model Training](#model-training)
 - [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
-## Demo
-
-![Demo GIF](https://your-image-link.com/demo.gif)
 
 ## Installation
 
@@ -91,4 +85,109 @@ def preprocess_image(image_path):
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
+
+    4. Model Prediction
+The preprocessed image is fed into the pre-trained Keras model to get predictions. The class with the highest probability is chosen as the predicted class.
+
+python
+Copy code
+def predict_class(img_array):
+    predictions = model.predict(img_array)
+    predicted_class_idx = np.argmax(predictions[0])
+    predicted_class = class_labels[predicted_class_idx]
+    return predicted_class, predictions[0]
+5. Result Display
+The application renders the result on the same page, showing the uploaded image, the predicted class, and the probabilities for all classes. The HTML template (index.html) handles the display.
+
+6. Static File Handling
+A separate route is defined to serve the uploaded images from the static/uploads directory.
+
+python
+Copy code
+@app.route('/display/<filename>')
+def display_image(filename):
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
+Model Training
+If you want to train the model yourself, follow these steps:
+
+1. Dataset Preparation
+Prepare your dataset of images categorized into classes (e.g., cloudy, desert, green_area, water). Organize the images into the following directories:
+
+train/: Training images for model training.
+val/: Validation images for model evaluation during training.
+test/: Testing images for final model evaluation.
+2. Data Augmentation and Preprocessing
+Use ImageDataGenerator from Keras to augment and preprocess your images. Augmentation helps in generating variations of images to improve model robustness.
+
+3. Model Definition
+Define your convolutional neural network (CNN) model using Keras. Below is a sample model definition:
+
+python
+Copy code
+model = models.Sequential([
+    layers.Conv2D(8, (3, 3), activation='relu', input_shape=(256, 256, 3)),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(16, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(16, (3, 3), activation='relu'),
+    layers.Flatten(),
+    layers.Dense(16, activation='relu'),
+    layers.Dense(4, activation='softmax')
+])
+4. Model Compilation
+Compile your model with an optimizer, loss function, and metrics:
+
+python
+Copy code
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+5. Model Training
+Train your model using the prepared dataset:
+
+python
+Copy code
+history = model.fit(
+    train_generator,
+    epochs=4,
+    validation_data=val_generator
+)
+6. Model Evaluation
+Evaluate your model on the test dataset to measure its performance:
+
+python
+Copy code
+test_loss, test_acc = model.evaluate(test_generator)
+print(f"Test Accuracy: {test_acc}")
+7. Save the Trained Model
+Save your trained model for later use:
+
+python
+Copy code
+model.save('my_model.h5')
+Folder Structure
+php
+Copy code
+flask-image-classification/
+│
+├── static/
+│   ├── uploads/           # Directory for storing uploaded images
+│   └── style.css          # (Optional) Add your custom styles
+│
+├── templates/
+│   └── index.html         # HTML template for the web interface
+│
+├── app.py                 # Main Flask application
+├── my_model.h5            # Pre-trained Keras model
+├── requirements.txt       # List of required packages
+└── README.md              # This README file
+Contributing
+Contributions are welcome! Please open an issue or submit a pull request for any improvements, bug fixes, or new features.
+
+Fork the repository.
+Create a new branch: git checkout -b feature-branch.
+Make your changes and commit them: git commit -m 'Add new feature'.
+Push to the branch: git push origin feature-branch.
+Submit a pull request.
+'''
 
