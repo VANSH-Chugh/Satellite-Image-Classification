@@ -1,6 +1,5 @@
 # Flask Image Classification
 
-![Flask Image Classification](https://your-image-link.com/banner.png)
 
 This repository contains a Flask web application for image classification using a pre-trained Keras model. Users can upload images, and the application will predict the class of the uploaded image, displaying the result along with the probabilities for each class.
 
@@ -127,6 +126,7 @@ test/: Testing images for final model evaluation.
 Use ImageDataGenerator from Keras to augment and preprocess your images. Augmentation helps in generating variations of images to improve model robustness.
 
 #### 3. Model Definition
+```
 Define your convolutional neural network (CNN) model using Keras. Below is a sample model definition:
 
 python
@@ -141,6 +141,8 @@ model = models.Sequential([
     layers.Dense(16, activation='relu'),
     layers.Dense(4, activation='softmax')
 ])
+
+```
 #### 4. Model Compilation
 Compile your model with an optimizer, loss function, and metrics:
 
@@ -190,13 +192,4 @@ flask-image-classification/
 ├── requirements.txt       # List of required packages
 └── README.md              # This README file
 ```
-Contributing
-Contributions are welcome! Please open an issue or submit a pull request for any improvements, bug fixes, or new features.
-
-Fork the repository.
-Create a new branch: git checkout -b feature-branch.
-Make your changes and commit them: git commit -m 'Add new feature'.
-Push to the branch: git push origin feature-branch.
-Submit a pull request.
-'''
 
