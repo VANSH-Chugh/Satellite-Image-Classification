@@ -153,6 +153,9 @@ model = models.Sequential([
 ])
 
 ```
+
+I would have also used Early stopping to reduce the overfitting, but since i already started model training, so due to time constraints i did not implemented it.
+
 #### 4. Model Compilation
 Compile your model with an optimizer, loss function, and metrics:
 
