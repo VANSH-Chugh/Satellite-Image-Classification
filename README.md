@@ -101,7 +101,7 @@ def predict_class(img_array):
 
 ```
 
-![Image Alt Text](https://github.com/yourusername/yourrepository/blob/main/path/to/image.jpg)
+![Image Alt Text](https://github.com/VANSH-Chugh/Satellite-Image-Classification/blob/main/output/1.png)
 
 ### 5. Result Display
 The application renders the result on the same page, showing the uploaded image, the predicted class, and the probabilities for all classes. The HTML template (index.html) handles the display.
