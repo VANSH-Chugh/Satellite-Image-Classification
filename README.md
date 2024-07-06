@@ -176,6 +176,7 @@ model.save('my_model.h5')
 php
 Copy code
 flask-image-classification/
+```
 │
 ├── static/
 │   ├── uploads/           # Directory for storing uploaded images
@@ -188,6 +189,7 @@ flask-image-classification/
 ├── my_model.h5            # Pre-trained Keras model
 ├── requirements.txt       # List of required packages
 └── README.md              # This README file
+```
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any improvements, bug fixes, or new features.
 
