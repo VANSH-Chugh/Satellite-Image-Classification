@@ -172,7 +172,7 @@ Save your trained model for later use:
 python
 Copy code
 model.save('my_model.h5')
-Folder Structure
+## Folder Structure
 php
 Copy code
 flask-image-classification/
