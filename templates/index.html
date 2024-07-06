@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Image Classification</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-5 mb-5">Image Classification</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <input type="file" class="form-control-file" name="file" id="file">
+      </div>
+      <button type="submit" class="btn btn-primary">Upload and Classify</button>
+    </form>
+
+    {% if filename %}
+      <h2 class="mt-4">Uploaded Image:</h2>
+      <img src="{{ url_for('static', filename='uploads/' + filename) }}" class="img-fluid" style="max-width: 500px;">
+      <h2 class="mt-4">Prediction:</h2>
+      <p>Predicted Class: {{ predicted_class }}</p>
+      <p>Probabilities: {{ probabilities }}</p>
+    {% endif %}
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
